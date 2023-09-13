@@ -6,11 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 ///
 /// @author luwenjie on 2023/4/28 11:17:22
 
-abstract class BaseWidget extends ConsumerStatefulWidget {
-  const BaseWidget({super.key});
+abstract class BasePage extends ConsumerStatefulWidget {
+  const BasePage({super.key});
 }
 
-abstract class BaseState<T extends BaseWidget> extends ConsumerState<T>
+abstract class BasePageState<T extends BasePage> extends ConsumerState<T>
     with WidgetsBindingObserver {
   final _disposeSet = <Function?>[];
   final _disposeFutures = <Future<dynamic>>[];
