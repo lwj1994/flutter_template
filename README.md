@@ -1,3 +1,11 @@
-# shoubox
+# flutter_template
 
-万能的收纳 App
+* db: isar
+* network: dio/retrofit
+* state: riverpod
+* route: auto_route
+* mvi
+* theme util
+* file util
+* toast
+
