@@ -28,12 +28,15 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+dependency_overrides:
+  analyzer: ^6.2.0
+  collection: ^1.18.0
+
 dependencies:
   flutter:
     sdk: flutter
   dio: ^5.3.2
   visibility_detector: ^0.4.0+2
-  collection: ^1.17.2
   permission_handler:
     git:
       url: https://github.com/baseflow/flutter-permission-handler
@@ -54,7 +57,7 @@ dependencies:
   url_launcher: ^6.1.14
   card_swiper: ^3.0.1
   app_settings: ^5.0.0
-  encrypt: ^5.0.1
+  encrypt: ^5.0.2
   fluttertoast: ^8.2.2
   focus_detector_v2: ^3.1.0+1
   flutter_displaymode: ^0.6.0
@@ -77,6 +80,7 @@ dev_dependencies:
     sdk: flutter
   logger: ^2.0.2
   build_runner: ^2.4.6
+  isar_generator: *isar_version
   json_serializable: ^6.7.1
   retrofit_generator: ^7.0.8
   auto_route_generator: ^7.3.1

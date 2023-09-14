@@ -29,7 +29,7 @@ class _MainPage extends BasePageState<MainPage> {
   Widget build(BuildContext context) {
     ref.watch(_provider);
     return Scaffold(
-
+        body: Text("MainPage"),
     );
   }
 

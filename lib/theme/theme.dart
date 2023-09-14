@@ -1,15 +1,10 @@
-import 'package:collection/collection.dart';
-import 'package:congress/db/share_pre.dart';
-import 'package:congress/feature/theme/color.dart';
-import 'package:congress/values/colors.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
+import 'package:shoubox/data/app_kv.dart';
+import 'package:shoubox/main.dart';
 
 /// @author luwenjie on 2023/8/25 19:07:21
 
-final themeUtil = _Theme();
-
+final appTheme = _Theme();
 
 enum AppThemeMode {
   light(id: "light", mode: ThemeMode.light),
@@ -41,13 +36,13 @@ class _Theme {
   set theme(AppThemeMode value) {
     _notifier.value = value;
     _mode = value;
-    CongShareprefKey.themeMode.string = value.id;
+    // AppShareKeys.themeMode.string = value.id;
   }
 
   AppThemeMode get theme => _mode;
 
-  init() {
-    final s = CongShareprefKey.themeMode.string;
+  Future<void> init() async {
+    final s = AppShareKeys.themeMode.string;
     // 默认 system
     _mode = AppThemeMode.values.firstWhereOrNull((e) => e.id == s) ??
         AppThemeMode.system;
@@ -59,9 +54,8 @@ class _Theme {
       // iOS
       statusBarBrightness: isLightMode ? Brightness.light : Brightness.dark,
       // Android
-      systemNavigationBarColor:
-          isLightMode ? AppColors.background : AppDarkColors.background,
-      systemNavigationBarDividerColor: AppColors.transparent,
+      systemNavigationBarColor: isLightMode ? Colors.white : Colors.black,
+      systemNavigationBarDividerColor: Colors.transparent,
       // Android
       systemNavigationBarIconBrightness:
           isLightMode ? Brightness.light : Brightness.dark,
