@@ -36,7 +36,12 @@ dependencies:
   flutter:
     sdk: flutter
   dio: ^5.3.2
+  appwrite: ^11.0.0
   visibility_detector: ^0.4.0+2
+  wen_foundation:
+    git:
+      url: 'https://github.com/lwj1994/flutter_wen_foundation'
+      ref: 'main'
   permission_handler:
     git:
       url: https://github.com/baseflow/flutter-permission-handler

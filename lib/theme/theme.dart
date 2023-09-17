@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:shoubox/data/app_kv.dart';
-import 'package:shoubox/main.dart';
 
 /// @author luwenjie on 2023/8/25 19:07:21
 
@@ -44,8 +45,8 @@ class _Theme {
   Future<void> init() async {
     final s = AppShareKeys.themeMode.string;
     // 默认 system
-    _mode = AppThemeMode.values.firstWhereOrNull((e) => e.id == s) ??
-        AppThemeMode.system;
+    _mode =
+        AppThemeMode.values.firstWhere((e) => e.id == s) ?? AppThemeMode.system;
     SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
       // Android
       statusBarColor: Colors.transparent,

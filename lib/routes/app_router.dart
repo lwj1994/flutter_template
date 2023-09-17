@@ -4,7 +4,6 @@ import 'package:shoubox/feature/main/page.dart';
 import 'package:shoubox/feature/main/splash_page.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-
 part 'app_router.gr.dart';
 
 final appRouter = AppRouter();
@@ -31,7 +30,6 @@ class AppRouter extends _$AppRouter {
         path: "/main",
         page: MainRoute.page,
         transitionsBuilder: TransitionsBuilders.noTransition),
-
   ];
 }
 
@@ -43,8 +41,6 @@ extension RouterExtensions on StackRouter {
       push(route);
     }
   }
-
-
 
   // popToMain() {
   //   popUntil((route) {
@@ -64,7 +60,6 @@ extension RouterExtensions on StackRouter {
   //   });
   // }
 }
-
 
 class AppRouterObserver extends AutoRouterObserver {
   static const String tag = "AppRouterObserver";
@@ -124,4 +119,3 @@ class AppRouterObserver extends AutoRouterObserver {
     debugPrint('Tab route re-visited: ${route.name}');
   }
 }
-

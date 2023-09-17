@@ -1,5 +1,10 @@
-import 'package:shoubox/main.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wen_foundation/foundation.dart';
+
+import 'routes/app_router.dart';
 
 /// @author luwenjie on 2023/9/14 22:52:57
 ///
@@ -52,21 +57,21 @@ class _AppPageState extends BasePageState<Application> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-        routerDelegate: appRouter.delegate(navigatorObservers: () {
-          return [AppRouterObserver()];
-        }),
-        title: "app",
-        routeInformationParser: appRouter.defaultRouteParser(),
-        showPerformanceOverlay: false,
-        // locale: const Locale('zh', 'CH'),
-        // localizationsDelegates: const [
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        // ],
-        // supportedLocales: const [
-        //   Locale('zh', 'CH'),
-        //   Locale('en', 'US'),
-        // ]
+      routerDelegate: appRouter.delegate(navigatorObservers: () {
+        return [AppRouterObserver()];
+      }),
+      title: "app",
+      routeInformationParser: appRouter.defaultRouteParser(),
+      showPerformanceOverlay: false,
+      // locale: const Locale('zh', 'CH'),
+      // localizationsDelegates: const [
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      // ],
+      // supportedLocales: const [
+      //   Locale('zh', 'CH'),
+      //   Locale('en', 'US'),
+      // ]
     );
     // theme: themeLight,
     // darkTheme: themeDark,

@@ -1,8 +1,7 @@
 /// @author luwenjie on 2023/9/14 22:43:45
 
 import 'package:isar/isar.dart';
-import 'package:shoubox/util/env.dart';
-import 'package:shoubox/util/file.dart';
+import 'package:wen_foundation/foundation.dart';
 
 import 'db_bean.dart';
 
