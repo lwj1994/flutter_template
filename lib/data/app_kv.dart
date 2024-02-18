@@ -12,23 +12,24 @@ enum AppShareKeys {
 }
 
 extension StringExtension on String {
-  Future<void> saveTo(AppShareKeys key) =>
-      appDb.putKeyValueDbBean(KeyValueDbBean(key: key.name)..value = this);
+  Future<void> saveTo(AppShareKeys key) => DbManager.instance
+      .putKeyValueDbBean(KeyValueDbBean(key: key.name)..value = this);
 }
 
 extension SpKeyExtension on AppShareKeys {
-  String get string => appDb.getKeyValueDbBean(name);
+  String get string => DbManager.instance.getKeyValueDbBean(name);
 
-  set string(String v) =>
-      appDb.putKeyValueDbBean(KeyValueDbBean(key: name)..value = v);
+  set string(String v) => DbManager.instance
+      .putKeyValueDbBean(KeyValueDbBean(key: name)..value = v);
 
-  int get intValue => int.tryParse(appDb.getKeyValueDbBean(name)) ?? 0;
+  int get intValue =>
+      int.tryParse(DbManager.instance.getKeyValueDbBean(name)) ?? 0;
 
-  set intValue(int v) =>
-      appDb.putKeyValueDbBean(KeyValueDbBean(key: name)..value = v.toString());
+  set intValue(int v) => DbManager.instance
+      .putKeyValueDbBean(KeyValueDbBean(key: name)..value = v.toString());
 
-  bool get boolean => appDb.getKeyValueDbBean(name) == "true";
+  bool get boolean => DbManager.instance.getKeyValueDbBean(name) == "true";
 
-  set boolean(bool v) =>
-      appDb.putKeyValueDbBean(KeyValueDbBean(key: name)..value = v.toString());
+  set boolean(bool v) => DbManager.instance
+      .putKeyValueDbBean(KeyValueDbBean(key: name)..value = v.toString());
 }

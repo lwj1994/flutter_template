@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:shoubox/feature/main/page.dart';
-import 'package:shoubox/feature/main/splash_page.dart';
+import 'package:temple/feature/main/page.dart';
+import 'package:temple/feature/main/splash_page.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 part 'app_router.gr.dart';
 
-final appRouter = AppRouter();
+final AppRouter appRouter = AppRouter();
 
 @AutoRouterConfig(
   replaceInRouteName: 'Page,Route',

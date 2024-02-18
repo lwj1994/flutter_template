@@ -2,14 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wen_foundation/foundation.dart';
+import 'package:lu_foundation/foundation.dart';
 
 import 'routes/app_router.dart';
 
 /// @author luwenjie on 2023/9/14 22:52:57
 ///
 
-class Application extends BasePage {
+class Application extends LuPage {
   const Application({super.key});
 
   static void kill() {
@@ -20,7 +20,7 @@ class Application extends BasePage {
   ConsumerState<ConsumerStatefulWidget> createState() => _AppPageState();
 }
 
-class _AppPageState extends BasePageState<Application> {
+class _AppPageState extends LuPageState<Application> {
   @override
   void initState() {
     super.initState();
@@ -58,7 +58,7 @@ class _AppPageState extends BasePageState<Application> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerDelegate: appRouter.delegate(navigatorObservers: () {
-        return [AppRouterObserver()];
+        return <NavigatorObserver>[AppRouterObserver()];
       }),
       title: "app",
       routeInformationParser: appRouter.defaultRouteParser(),
