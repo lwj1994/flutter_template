@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lu_foundation/foundation.dart';
+import 'package:uizakura/uizakura.dart';
 
 /// @author luwenjie on 2024/2/18 22:28:50
 ///

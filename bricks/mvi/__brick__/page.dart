@@ -3,20 +3,20 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wen_foundation/foundation.dart';
+import 'package:uizakura/uizakura.dart';
 import 'model.dart';
 import 'view_model.dart';
 
 /// @author luwenjie on 2023/9/29 14:47:38
 @RoutePage()
-class {{pageName.pascalCase()}}Page extends BasePage {
+class {{pageName.pascalCase()}}Page extends UizakuraPage {
   const {{pageName.pascalCase()}}Page({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _{{pageName.pascalCase()}}Page();
 }
 
-class _{{pageName.pascalCase()}}Page extends BasePageState<{{pageName.pascalCase()}}Page> {
+class _{{pageName.pascalCase()}}Page extends UizakuraPageState<{{pageName.pascalCase()}}Page> {
   late final _provider = {{pageName.camelCase()}}Provider;
 
   {{pageName.pascalCase()}}State get _state => ref.read(_provider);

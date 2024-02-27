@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lu_foundation/foundation.dart';
+import 'package:uizakura/uizakura.dart';
 import 'model.dart';
 
 /// @author luwenjie on 2023/9/13 23:32:07
@@ -9,6 +9,6 @@ final AutoDisposeStateNotifierProvider<MainViewModel, MainState> mainProvider =
   return MainViewModel(MainState());
 });
 
-class MainViewModel extends ViewModel<MainState> {
+class MainViewModel extends UizakuraViewModel<MainState> {
   MainViewModel(super.state);
 }

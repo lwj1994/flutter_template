@@ -1,4 +1,5 @@
-import 'database.dart';
+import 'package:temple/data/database.dart';
+
 import 'db_bean.dart';
 
 /// @author luwenjie on 2023/9/14 22:56:26

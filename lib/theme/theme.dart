@@ -1,7 +1,10 @@
+/// @author luwenjie on 2023/8/25 19:07:21
+
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:temple/data/app_kv.dart';
+import 'package:temple/data/key_value/app_kv.dart';
 
 import 'extension_color.dart';
 import 'text_style.dart';
@@ -34,6 +37,59 @@ class ThemeManager {
   final ValueNotifier<AppThemeMode> _notifier =
       ValueNotifier<AppThemeMode>(AppThemeMode.system);
 
+  SystemUiOverlayStyle get systemUiLightStyle =>
+      SystemUiOverlayStyle.dark.copyWith(
+          statusBarColor: Colors.transparent,
+          systemNavigationBarColor: Colors.white70);
+
+  SystemUiOverlayStyle get systemUiDarkStyle =>
+      SystemUiOverlayStyle.light.copyWith(
+          statusBarColor: Colors.transparent,
+          systemNavigationBarColor: Colors.black);
+
+  ThemeData get lightThemeData => ThemeData.light().copyWith(
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.white.withOpacity(0.9),
+        titleTextStyle: AppTextStyle.h4(),
+        toolbarTextStyle: AppTextStyle.b4(),
+        iconTheme: IconThemeData(
+          color: Colors.black.withOpacity(0.8),
+        ),
+        elevation: 0,
+      ),
+      inputDecorationTheme: _M3Theme.lightInputDecorationTheme,
+      cardTheme: _M3Theme.lightCard,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: Colors.white.withOpacity(0.9),
+      ),
+      bottomSheetTheme: _M3Theme.bottomSheet,
+      extensions: [AppThemeColor.light()],
+      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4)));
+
+  ThemeData get darkThemeData => ThemeData.dark().copyWith(
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black.withOpacity(0.9),
+          titleTextStyle: AppTextStyle.h4(color: Colors.white.withOpacity(0.9)),
+          toolbarTextStyle:
+              AppTextStyle.b4(color: Colors.white.withOpacity(0.9)),
+          iconTheme: IconThemeData(
+            color: Colors.white.withOpacity(0.8),
+          ),
+          elevation: 0,
+        ),
+        cardTheme: _M3Theme.darkCard,
+        inputDecorationTheme: _M3Theme.darkInputDecorationTheme,
+        bottomSheetTheme: _M3Theme.bottomSheet,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.black.withOpacity(0.9),
+        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+        extensions: [AppThemeColor.dark()],
+      );
+
+  SystemUiOverlayStyle get adaptiveSystemUiDarkStyle =>
+      isLightMode ? systemUiLightStyle : systemUiDarkStyle;
+
   Function() listen(Function(AppThemeMode mode) onThemeChanged) {
     a() {
       onThemeChanged.call(_notifier.value);
@@ -50,7 +106,7 @@ class ThemeManager {
   set theme(AppThemeMode value) {
     _notifier.value = value;
     _mode = value;
-    // AppShareKeys.themeMode.string = value.id;
+    AppShareKeys.themeMode.string = value.id;
   }
 
   AppThemeMode get theme => _mode;
@@ -58,8 +114,8 @@ class ThemeManager {
   Future<void> initialize() async {
     final String s = AppShareKeys.themeMode.string;
     // 默认 system
-    _mode =
-        AppThemeMode.values.firstWhere((e) => e.id == s) ?? AppThemeMode.system;
+    _mode = AppThemeMode.values.firstWhereOrNull((e) => e.id == s) ??
+        AppThemeMode.system;
     SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
       // Android
       statusBarColor: Colors.transparent,
@@ -89,50 +145,10 @@ class ThemeManager {
         return false;
     }
   }
-
-  ThemeData get lightThemeData => ThemeData.light().copyWith(
-      appBarTheme: AppBarTheme(
-        backgroundColor: Colors.white.withOpacity(0.9),
-        titleTextStyle: AppTextStyle.h4(),
-        toolbarTextStyle: AppTextStyle.b4(),
-        iconTheme: IconThemeData(
-          color: Colors.black.withOpacity(0.8),
-        ),
-        elevation: 0,
-      ),
-      inputDecorationTheme: _M3Theme.inputDecorationTheme,
-      cardTheme: _M3Theme.lightCard,
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: Colors.white.withOpacity(0.9),
-      ),
-      bottomSheetTheme: _M3Theme.bottomSheet,
-      extensions: [AppThemeColor.light()],
-      colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6750A4)));
-
-  ThemeData get darkThemeData => ThemeData.dark().copyWith(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.black.withOpacity(0.9),
-          titleTextStyle: AppTextStyle.h4(color: Colors.white.withOpacity(0.9)),
-          toolbarTextStyle:
-              AppTextStyle.b4(color: Colors.white.withOpacity(0.9)),
-          iconTheme: IconThemeData(
-            color: Colors.white.withOpacity(0.8),
-          ),
-          elevation: 0,
-        ),
-        cardTheme: _M3Theme.darkCard,
-        inputDecorationTheme: _M3Theme.inputDecorationTheme,
-        bottomSheetTheme: _M3Theme.bottomSheet,
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: Colors.black.withOpacity(0.9),
-        ),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
-        extensions: [AppThemeColor.dark()],
-      );
 }
 
 class _M3Theme {
-  static final CardTheme lightCard = CardTheme(
+  static final lightCard = CardTheme(
       surfaceTintColor: Colors.deepOrangeAccent,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)));
 
@@ -140,7 +156,7 @@ class _M3Theme {
       color: Colors.black87,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)));
 
-  static const BottomSheetThemeData bottomSheet = BottomSheetThemeData(
+  static const bottomSheet = BottomSheetThemeData(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10), topRight: Radius.circular(10))),
@@ -148,10 +164,15 @@ class _M3Theme {
     showDragHandle: true,
   );
 
-  static const InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
-      border: InputBorder.none,
+  static const lightInputDecorationTheme = InputDecorationTheme(
+      border: OutlineInputBorder(),
       contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      constraints: BoxConstraints(minHeight: 100));
+      constraints: BoxConstraints(minHeight: 0));
+
+  static const darkInputDecorationTheme = InputDecorationTheme(
+      border: OutlineInputBorder(),
+      contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      constraints: BoxConstraints(minHeight: 0));
 
   _M3Theme._();
 }

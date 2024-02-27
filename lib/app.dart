@@ -1,15 +1,19 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lu_foundation/foundation.dart';
+import 'package:uizakura/uizakura.dart';
 
-import 'routes/app_router.dart';
+import 'route/app_router.dart';
+import 'theme/theme.dart';
 
 /// @author luwenjie on 2023/9/14 22:52:57
 ///
 
-class Application extends LuPage {
+class Application extends UizakuraPage {
   const Application({super.key});
 
   static void kill() {
@@ -20,7 +24,7 @@ class Application extends LuPage {
   ConsumerState<ConsumerStatefulWidget> createState() => _AppPageState();
 }
 
-class _AppPageState extends LuPageState<Application> {
+class _AppPageState extends UizakuraPageState<Application> {
   @override
   void initState() {
     super.initState();
@@ -49,33 +53,54 @@ class _AppPageState extends LuPageState<Application> {
           debugPrint("app ${state.name}");
         });
     WidgetsBinding.instance.addObserver(this);
-    // congThemeUtil.listen((CongThemeMode mode) {
-    //   setState(() {});
-    // });
+    ThemeManager.instance.listen((AppThemeMode mode) {
+      setState(() {});
+    });
+    PlatformDispatcher.instance.onLocaleChanged = () {
+      _initLocale();
+    };
+  }
+
+  @override
+  void didChangeLocales(List<Locale>? locales) {
+    super.didChangeLocales(locales);
+    _initLocale();
+  }
+
+  void _initLocale() {
+    if (PlatformDispatcher.instance.locale.languageCode == "zh") {
+      if (PlatformDispatcher.instance.locale.scriptCode?.toLowerCase() ==
+          "hans") {
+        context.setLocale(const Locale("zh", "CN"));
+      }
+      if (PlatformDispatcher.instance.locale.scriptCode?.toLowerCase() ==
+          "hant") {
+        context.setLocale(const Locale("zh", "TW"));
+      }
+    } else {
+      context.setLocale(const Locale("en", "US"));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerDelegate: appRouter.delegate(navigatorObservers: () {
-        return <NavigatorObserver>[AppRouterObserver()];
-      }),
-      title: "app",
-      routeInformationParser: appRouter.defaultRouteParser(),
-      showPerformanceOverlay: false,
-      // locale: const Locale('zh', 'CH'),
-      // localizationsDelegates: const [
-      //   GlobalMaterialLocalizations.delegate,
-      //   GlobalWidgetsLocalizations.delegate,
-      // ],
-      // supportedLocales: const [
-      //   Locale('zh', 'CH'),
-      //   Locale('en', 'US'),
-      // ]
+    _initLocale();
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: ThemeManager.instance.adaptiveSystemUiDarkStyle,
+      child: MaterialApp.router(
+        routerDelegate: appRouter.delegate(navigatorObservers: () {
+          return [AppRouterObserver()];
+        }),
+        title: "temple",
+        routeInformationParser: appRouter.defaultRouteParser(),
+        showPerformanceOverlay: false,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        themeMode: ThemeManager.instance.theme.mode,
+        theme: ThemeManager.instance.lightThemeData,
+        darkTheme: ThemeManager.instance.darkThemeData,
+      ),
     );
-    // theme: themeLight,
-    // darkTheme: themeDark,
-    // themeMode: congThemeUtil.theme.mode,
-    // themeMode: ThemeMode.light,
   }
 }

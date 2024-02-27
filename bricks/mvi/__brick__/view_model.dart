@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wen_foundation/foundation.dart';
+import 'package:uizakura/uizakura.dart';
 import 'model.dart';
 
 /// @author luwenjie on 2023/9/29 14:47:38
@@ -12,7 +12,7 @@ final {{pageName.camelCase()}}Provider =
   return {{pageName.pascalCase()}}ViewModel({{pageName.pascalCase()}}State());
 });
 
-class {{pageName.pascalCase()}}ViewModel extends ViewModel<{{pageName.pascalCase()}}State> {
+class {{pageName.pascalCase()}}ViewModel extends UizakuraViewModel<{{pageName.pascalCase()}}State> {
   {{pageName.pascalCase()}}ViewModel(super.state);
 }
 

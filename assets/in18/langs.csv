@@ -1,0 +1,18 @@
+str,en_US,zh_CN,zh_TW
+create.title,Pick a new one,新建,選擇新的筆記
+main.bottombar.home,inbox,收集箱,收集箱
+main.bottombar.label,label,标签,标签
+main.bottombar.highlight,highlight,高亮,高亮
+main.bottombar.setting,setting,设置,設置
+noteType.post,note,笔记,筆記
+noteType.readLater,readLater,稍后阅读,稍後閱讀
+save,save,保存,保存
+note.hint,write your thought of this moment...,这一刻的想法...,這一刻的想法...
+location,location,所在位置,所在位置
+theme.followSystem,Follow System,跟随系统,跟随系统
+theme.darkMode,Dark Mode,深色模式,深色模式
+home.unreadFloatBubble,%s new articles,%s 篇新文章,%s 篇新文章
+home.headerToday,Today,今日,今日
+home.headerSubscription,Subscription,订阅,订阅
+home.headerArchived,Archived,已归档,已归档
+home.headerSmartList,Smart List,智能列表,智能列表

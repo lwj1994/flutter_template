@@ -1,9 +1,9 @@
 /// @author luwenjie on 2023/9/14 22:43:45
 
 import 'package:isar/isar.dart';
-import 'package:lu_foundation/foundation.dart';
+import 'package:uizakura/uizakura.dart';
 
-import 'db_bean.dart';
+import 'key_value/db_bean.dart';
 
 /// @author luwenjie on 2023/4/7 15:37:43
 
